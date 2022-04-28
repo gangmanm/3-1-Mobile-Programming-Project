@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1064761120988",
+    "project_id": "perfect-c921c",
+    "storage_bucket": "perfect-c921c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064761120988:android:87594388c1f67df04b3c19",
+        "android_client_info": {
+          "package_name": "com.example.perpectday"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1064761120988-0h471aumq35b23qc2ep2auhvmgd75bmt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.perpectday",
+            "certificate_hash": "4b3c6e3e860c145c5efdf101dbc647042da8f05b"
+          }
+        },
+        {
+          "client_id": "1064761120988-0bgejf8n3agouuqsb0lo52einrcb3891.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjZ8uAodD2ihTGZ6jgiDvtvaeRtVn2fuw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1064761120988-0bgejf8n3agouuqsb0lo52einrcb3891.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1012324840954",
+    "project_id": "androidtermproject-3e522",
+    "storage_bucket": "androidtermproject-3e522.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012324840954:android:0ceb3f0c2f159e38c82043",
+        "android_client_info": {
+          "package_name": "com.example.perpectday"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012324840954-kp5kes1gbjvoruchtm2c5v48ecf303b8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDshvj3AKVatVGmqNPWQpcPdJNZ2TCUFdU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1012324840954-kp5kes1gbjvoruchtm2c5v48ecf303b8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
