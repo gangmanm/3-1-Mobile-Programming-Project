@@ -5,7 +5,16 @@ public class NewPost{
     private String title;
     private String subtitle;
     private String content;
+    private String time;
+    private String tag;
 
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 
     public String getTitle() {
         return title;
@@ -31,5 +40,11 @@ public class NewPost{
         this.content = content;
     }
 
+    public String getTime() {
+        return time;
+    }
 
+    public void setTime(String time) {
+        this.time = time;
+    }
 }

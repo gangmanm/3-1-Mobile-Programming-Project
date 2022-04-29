@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openMainActivity() {
-        Intent intent = new Intent(this,Post.class);
+        Intent intent = new Intent(this,PostList.class);
         startActivity(intent);
     }
 

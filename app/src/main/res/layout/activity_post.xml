@@ -17,7 +17,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:animateLayoutChanges="true">
+            android:animateLayoutChanges="true"
+            android:id="@+id/note">
 
             <ImageView
                 android:id="@+id/imageBack"
@@ -102,6 +103,7 @@
                 app:layout_constraintStart_toEndOf="@id/viewSubtitleIndicator"
                 app:layout_constraintTop_toBottomOf="@id/inputNoteTitle" />
 
+
             <View
                 android:id="@+id/viewSubtitleIndicator"
                 android:layout_width="5sp"
@@ -112,14 +114,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/inputNoteSubtitle" />
 
+
             <EditText
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginEnd="12dp"
                 android:layout_marginBottom="12dp"
+                android:layout_marginLeft="20dp"
                 android:background="@null"
                 android:fontFamily="@font/ubuntu_medium"
                 android:gravity="top"
@@ -132,10 +134,50 @@
                 android:textColorHint="@color/colorTextHint"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/inputNoteSubtitle" />
+                app:layout_constraintTop_toBottomOf="@id/inputNoteSubtitle"
+                app:layout_constraintVertical_bias="0.0"
+                tools:layout_editor_absoluteX="57dp" />
 
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/tagGroup"
+                app:layout_constraintTop_toBottomOf="@+id/content">
+                <RadioButton
+                    android:id ="@+id/tag_health"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="건강">
+
+                </RadioButton>
+                <RadioButton
+                    android:id ="@+id/tag_skincare"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="피부미용">
+
+                </RadioButton>
+                <RadioButton
+                    android:id ="@+id/tag_study"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="공부">
+
+                </RadioButton>
+                <RadioButton
+                    android:id ="@+id/tag_godlife"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="갓생">
+
+                </RadioButton>
+
+            </RadioGroup>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

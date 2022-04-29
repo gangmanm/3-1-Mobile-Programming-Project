@@ -14,11 +14,16 @@
         <entry key="app/src/main/res/drawable/end_view_background.xml" value="0.131" />
         <entry key="app/src/main/res/drawable/ic_baseline_language_24.xml" value="0.131" />
         <entry key="app/src/main/res/drawable/ic_done.xml" value="0.131" />
+        <entry key="app/src/main/res/drawable/ic_image.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_search.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_community.xml" value="0.22056159420289856" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_post.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_post.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_post_list.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_routine.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/newcard.xml" value="0.25" />
       </map>
     </option>
   </component>
