@@ -15,8 +15,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -48,14 +52,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
 
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         NewPost newpost = newPostArrayList.get(position);
 
         holder.title_card.setText(newpost.getTitle());
         holder.subtitle_card.setText(newpost.getSubtitle());
         holder.content_card.setText(newpost.getContent());
 
+
         holder.time_card.setText(newpost.getTime());
         holder.tag.setText(newpost.getTag());
+
+        // Code to Delete the written post, remove it from the firebase database
+        // check if the user UID match with the post uploader UID
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,31 +77,51 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        db.collection("NewPost")
-                                .whereEqualTo("title",newpost.getTitle())
+
+                        db.collection("NewPost").whereEqualTo("uid",user.getUid())
                                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
                                 if(task.isSuccessful() && !task.getResult().isEmpty())
                                 {
-                                    DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
-                                    String documentID = documentSnapshot.getId();
-                                    db.collection("NewPost").document(documentID).delete()
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
-                                                    Toast.makeText(context,"삭제되었습니다.",Toast.LENGTH_LONG).show();
-                                                    newPostArrayList.remove(position);
-                                                    notifyItemRemoved(position);
-                                                    notifyItemRangeChanged(position,newPostArrayList.size());
+                                    db.collection("NewPost")
+                                            .whereEqualTo("title", newpost.getTitle())
+                                            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if(task.isSuccessful() && !task.getResult().isEmpty())
+                                            {
+                                                DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+                                                String documentID = documentSnapshot.getId();
+                                                db.collection("NewPost").document(documentID).delete()
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void unused) {
+                                                                Toast.makeText(context,"삭제되었습니다.",Toast.LENGTH_LONG).show();
+                                                                newPostArrayList.remove(position);
+                                                                notifyItemRemoved(position);
+                                                                notifyItemRangeChanged(position,newPostArrayList.size());
 
 
-                                                }
-                                            });
+                                                            }
+                                                        });
 
+                                            }
+
+                                        }
+
+
+                                    });
                                 }
+                                else
+                                {
+                                    Toast.makeText(context,"작성자만 삭제할 수 있습니다.",Toast.LENGTH_LONG).show();
+                                }
+
                             }
                         });
+
                     }
                 });
 
@@ -126,6 +155,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         TextView tag;
         ImageView delete;
         String docTitle;
+        TextView uid;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title_card = itemView.findViewById(R.id.title_card);
@@ -134,6 +164,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             tag = itemView.findViewById(R.id.tag);
             time_card = itemView.findViewById(R.id.content_time);
             delete = itemView.findViewById(R.id.delete_card);
+
 
         }
     }

@@ -16,6 +16,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -61,6 +63,7 @@ FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         EditText NoteTitle  = (EditText)findViewById(R.id.inputNoteTitle);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         ImageView imageSave = findViewById(R.id.imageSave);
         imageSave.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -68,6 +71,7 @@ FirebaseFirestore db = FirebaseFirestore.getInstance();
                newpost.setSubtitle(post_subtitle.getText().toString());
                newpost.setContent(post_content.getText().toString());
                newpost.setTime(Calendar.getInstance().getTime().toString());
+               newpost.setUid(user.getUid());
 
                String mytag="";
                int radioId = radtag.getCheckedRadioButtonId();
