@@ -104,6 +104,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                                                                 notifyItemRangeChanged(position,newPostArrayList.size());
 
 
+
                                                             }
                                                         });
 

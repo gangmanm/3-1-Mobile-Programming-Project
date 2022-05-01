@@ -146,14 +146,15 @@
 
 
             <TextView
+                android:id="@+id/tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tag"
                 android:background="@null"
                 android:fontFamily="@font/ubuntu_regular"
                 android:imeOptions="actionDone"
                 android:inputType="text"
                 android:text="스킨케어"
+                android:textAlignment="center"
                 android:textColor="@color/colorNoteColor5"
                 android:textSize="13sp" />
 

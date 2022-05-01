@@ -1,33 +1,42 @@
 {
   "project_info": {
-    "project_number": "1012324840954",
-    "project_id": "androidtermproject-3e522",
-    "storage_bucket": "androidtermproject-3e522.appspot.com"
+    "project_number": "1064761120988",
+    "firebase_url": "https://perfect-c921c-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "perfect-c921c",
+    "storage_bucket": "perfect-c921c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1012324840954:android:0ceb3f0c2f159e38c82043",
+        "mobilesdk_app_id": "1:1064761120988:android:87594388c1f67df04b3c19",
         "android_client_info": {
           "package_name": "com.example.perpectday"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1012324840954-kp5kes1gbjvoruchtm2c5v48ecf303b8.apps.googleusercontent.com",
+          "client_id": "1064761120988-jelj56v16edu5o5phgf70rnrgdlokof3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.perpectday",
+            "certificate_hash": "4b3c6e3e860c145c5efdf101dbc647042da8f05b"
+          }
+        },
+        {
+          "client_id": "1064761120988-0bgejf8n3agouuqsb0lo52einrcb3891.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDshvj3AKVatVGmqNPWQpcPdJNZ2TCUFdU"
+          "current_key": "AIzaSyAjZ8uAodD2ihTGZ6jgiDvtvaeRtVn2fuw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1012324840954-kp5kes1gbjvoruchtm2c5v48ecf303b8.apps.googleusercontent.com",
+              "client_id": "1064761120988-0bgejf8n3agouuqsb0lo52einrcb3891.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

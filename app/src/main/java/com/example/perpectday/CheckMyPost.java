@@ -1,23 +1,18 @@
 package com.example.perpectday;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,76 +22,48 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class PostList extends AppCompatActivity {
-    public static final int REQUEST_CODE_ADD_NOTE =1;
+public class CheckMyPost extends AppCompatActivity {
+
     RecyclerView recyclerView;
     ArrayList<NewPost> newPostArrayList;
     MyAdapter myAdapter;
     FirebaseFirestore db;
-    static int first = 0;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_list);
-
-        ProgressDialog progressDialog = new ProgressDialog(this);
+        setContentView(R.layout.activity_check_my_post);
 
         recyclerView = findViewById(R.id.noteRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        db= FirebaseFirestore.getInstance();
+
+
+
+        db = FirebaseFirestore.getInstance();
         newPostArrayList = new ArrayList<NewPost>();
-        myAdapter = new MyAdapter(PostList.this,newPostArrayList);
+        myAdapter = new MyAdapter(CheckMyPost.this,newPostArrayList);
         recyclerView.setAdapter(myAdapter);
 
+
         EventChangeListener();
+        ImageView imageBack=findViewById(R.id.imageBack);
+        imageBack.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v)
+            {
+                startActivityForResult(new Intent(getApplicationContext(),PostList.class),
+                        1);
 
-        ImageView imageAddNoteMain = findViewById(R.id.imageAddNoteMain);
-
-        imageAddNoteMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivityForResult(new Intent(getApplicationContext(),Post.class),
-                        REQUEST_CODE_ADD_NOTE);
             }
         });
-
-        ImageView imageCheckMine = findViewById(R.id.imageAddLink);
-
-        imageCheckMine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivityForResult(new Intent(getApplicationContext(),CheckMyPost.class),
-                        REQUEST_CODE_ADD_NOTE);
-            }
-        });
-
-
-
-        /*
-        ImageView imageRefresh = findViewById(R.id.imageAddImage);
-
-        imageRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                newPostArrayList.clear();
-                EventChangeListener();
-            }
-        });
-      */
 
 
     }
 
-    private void deleteProduct()
-    {
-
-    }
 
     private void EventChangeListener() {
-        db.collection("NewPost").orderBy("time", Query.Direction.ASCENDING)
+        db.collection("NewPost").whereEqualTo("uid",user.getUid())
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
