@@ -25,12 +25,15 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context context;
     View v;
+    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     ArrayList<NewPost> newPostArrayList;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public MyAdapter(Context context, ArrayList<NewPost> newPostArrayList) {
@@ -52,12 +55,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
 
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         NewPost newpost = newPostArrayList.get(position);
 
         holder.title_card.setText(newpost.getTitle());
         holder.subtitle_card.setText(newpost.getSubtitle());
         holder.content_card.setText(newpost.getContent());
+
 
 
         holder.time_card.setText(newpost.getTime());
@@ -66,62 +70,59 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         // Code to Delete the written post, remove it from the firebase database
         // check if the user UID match with the post uploader UID
         holder.delete.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
                 builder.setTitle("정말 삭제하시겠습니까?");
                 builder.setMessage("한번 삭제시 되돌릴 수 없습니다");
-
                 builder.setPositiveButton("네", new DialogInterface.OnClickListener() {
+
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
+                        if(user.getUid().toString().equals(newpost.getUid())) {
 
-                        db.collection("NewPost").whereEqualTo("uid",user.getUid())
-                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            db.collection("NewPost").whereEqualTo("uid", user.getUid())
+                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-                                if(task.isSuccessful() && !task.getResult().isEmpty())
-                                {
-                                    db.collection("NewPost")
-                                            .whereEqualTo("title", newpost.getTitle())
-                                            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            if(task.isSuccessful() && !task.getResult().isEmpty())
-                                            {
-                                                DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
-                                                String documentID = documentSnapshot.getId();
-                                                db.collection("NewPost").document(documentID).delete()
-                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                            @Override
-                                                            public void onSuccess(Void unused) {
-                                                                Toast.makeText(context,"삭제되었습니다.",Toast.LENGTH_LONG).show();
-                                                                newPostArrayList.remove(position);
-                                                                notifyItemRemoved(position);
-                                                                notifyItemRangeChanged(position,newPostArrayList.size());
-
-
-
-                                                            }
-                                                        });
+                                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                                        db.collection("NewPost")
+                                                .whereEqualTo("title", newpost.getTitle())
+                                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                                                    DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+                                                    String documentID = documentSnapshot.getId();
+                                                    db.collection("NewPost").document(documentID).delete()
+                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void unused) {
+                                                                    Toast.makeText(context, "삭제되었습니다.", Toast.LENGTH_LONG).show();
+                                                                    newPostArrayList.remove(position);
+                                                                    notifyItemRemoved(position);
+                                                                    notifyItemRangeChanged(position, newPostArrayList.size());
+                                                                }
+                                                            });
+                                                }
 
                                             }
 
-                                        }
 
-
-                                    });
+                                        });
+                                     } else {
+                                        Toast.makeText(context, "작성자만 삭제할 수 있습니다.", Toast.LENGTH_LONG).show();
+                                    }
                                 }
-                                else
-                                {
-                                    Toast.makeText(context,"작성자만 삭제할 수 있습니다.",Toast.LENGTH_LONG).show();
-                                }
-
-                            }
-                        });
+                            });
+                        }
+                        else {
+                            Toast.makeText(context, "작성자만 삭제할 수 있습니다.", Toast.LENGTH_LONG).show();
+                        }
 
                     }
                 });
@@ -154,7 +155,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         TextView subtitle_card,content_card;
         TextView time_card;
         TextView tag;
-        ImageView delete;
+        static ImageView delete;
         String docTitle;
         TextView uid;
         public MyViewHolder(@NonNull View itemView) {
@@ -165,7 +166,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             tag = itemView.findViewById(R.id.tag);
             time_card = itemView.findViewById(R.id.content_time);
             delete = itemView.findViewById(R.id.delete_card);
-
 
         }
     }

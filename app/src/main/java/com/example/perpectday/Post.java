@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -92,6 +93,9 @@ FirebaseFirestore db = FirebaseFirestore.getInstance();
                         .add(newpost);
 
                 Toast.makeText(Post.this,"data inserted succefully",Toast.LENGTH_LONG).show();
+
+                startActivityForResult(new Intent(getApplicationContext(),PostList.class),
+                        1);
             }
         });
     }
