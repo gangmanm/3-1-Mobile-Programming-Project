@@ -115,6 +115,8 @@ public class Post_Detail extends AppCompatActivity {
 
                 Toast.makeText(Post_Detail.this,"data inserted succefully",Toast.LENGTH_LONG).show();
 
+                post_comment.setText("");
+
             }
         });
 
