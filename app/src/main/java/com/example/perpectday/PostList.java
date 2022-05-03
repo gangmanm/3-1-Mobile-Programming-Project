@@ -49,7 +49,7 @@ public class PostList extends AppCompatActivity {
         newPostArrayList = new ArrayList<NewPost>();
         myAdapter = new MyAdapter(PostList.this,newPostArrayList);
         recyclerView.setAdapter(myAdapter);
-
+        newPostArrayList.clear();
         EventChangeListener();
 
         ImageView imageAddNoteMain = findViewById(R.id.imageAddNoteMain);

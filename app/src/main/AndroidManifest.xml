@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PerpectDay">
         <activity
+            android:name=".Post_Detail"
+            android:exported="false" />
+        <activity
             android:name=".CheckMyPost"
             android:exported="false" />
         <activity

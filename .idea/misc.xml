@@ -13,6 +13,7 @@
         <entry key="app/src/main/res/drawable/dashboard_item_4_background.xml" value="0.131" />
         <entry key="app/src/main/res/drawable/end_view_background.xml" value="0.131" />
         <entry key="app/src/main/res/drawable/ic_baseline_account_box_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_comment_24.xml" value="0.171" />
         <entry key="app/src/main/res/drawable/ic_baseline_create_24.xml" value="0.12" />
         <entry key="app/src/main/res/drawable/ic_baseline_language_24.xml" value="0.131" />
         <entry key="app/src/main/res/drawable/ic_baseline_remove_circle_24.xml" value="0.1" />
@@ -26,8 +27,10 @@
         <entry key="app/src/main/res/layout/activity_community.xml" value="0.22056159420289856" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_post.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_post_detail.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_post_list.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_routine.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/comment.xml" value="0.21" />
         <entry key="app/src/main/res/layout/newcard.xml" value="0.375" />
       </map>
     </option>

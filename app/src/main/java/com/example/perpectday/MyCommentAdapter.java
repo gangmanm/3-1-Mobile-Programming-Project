@@ -1,11 +1,7 @@
 package com.example.perpectday;
 
-
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.transition.AutoTransition;
-import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,119 +9,90 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
+public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyViewHolder> {
+
 
     Context context;
-    View v;
+    ArrayList<NewComment> newCommentArrayList;
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    ArrayList<NewPost> newPostArrayList;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    public MyAdapter(Context context, ArrayList<NewPost> newPostArrayList) {
+
+    public MyCommentAdapter(Context context, ArrayList<NewComment> newCommentArrayList) {
         this.context = context;
-        this.newPostArrayList = newPostArrayList;
+        this.newCommentArrayList = newCommentArrayList;
     }
 
     @NonNull
     @Override
-    public MyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyCommentAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        v = LayoutInflater.from(context).inflate(R.layout.newcard,parent,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.comment,parent,false);
+
         return new MyViewHolder(v);
     }
 
-    public String id;
-
     @Override
-    public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyCommentAdapter.MyViewHolder holder, int position) {
 
+        NewComment newComment = newCommentArrayList.get(position);
 
+        holder.comment.setText(newComment.getComment());
+        holder.uid.setText(newComment.getUid());
 
-        NewPost newpost = newPostArrayList.get(position);
-
-        holder.title_card.setText(newpost.getTitle());
-        holder.subtitle_card.setText(newpost.getSubtitle());
-        holder.content_card.setText(newpost.getContent());
-
-
-
-        holder.time_card.setText(newpost.getTime());
-        holder.tag.setText(newpost.getTag());
-
-        holder.card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Post_Detail.title=newpost.getTitle();
-                Post_Detail.WriterUid = newpost.getUid()+newpost.getTime();
-
-                Intent intent = new Intent(v.getContext(), Post_Detail.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                v.getContext().startActivity(intent);
-
-            }
-        });
-
-
-        // Code to Delete the written post, remove it from the firebase database
-        // check if the user UID match with the post uploader UID
         holder.delete.setOnClickListener(new View.OnClickListener() {
+
 
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-                builder.setTitle("정말 삭제하시겠습니까?");
+                builder.setTitle("댓글을 삭제하시겠습니까?");
                 builder.setMessage("한번 삭제시 되돌릴 수 없습니다");
                 builder.setPositiveButton("네", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        if(user.getUid().toString().equals(newpost.getUid())) {
+                        if(user.getUid().toString().equals(newComment.getUid())) {
 
-                            db.collection("NewPost").whereEqualTo("uid", user.getUid())
+                            db.collection("NewComment").whereEqualTo("writerUid", newComment.getWriterUid())
                                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
                                     if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                                        db.collection("NewPost")
-                                                .whereEqualTo("title", newpost.getTitle())
+                                        db.collection("NewComment")
+                                                .whereEqualTo("comment", newComment.getComment())
                                                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                             @Override
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
                                                 if (task.isSuccessful() && !task.getResult().isEmpty()) {
                                                     DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
                                                     String documentID = documentSnapshot.getId();
-                                                    db.collection("NewPost").document(documentID).delete()
+                                                    db.collection("NewComment").document(documentID).delete()
                                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                 @Override
                                                                 public void onSuccess(Void unused) {
                                                                     Toast.makeText(context, "삭제되었습니다.", Toast.LENGTH_LONG).show();
-                                                                    newPostArrayList.remove(position);
+                                                                    newCommentArrayList.remove(position);
                                                                     notifyItemRemoved(position);
-                                                                    notifyItemRangeChanged(position, newPostArrayList.size());
+                                                                    notifyItemRangeChanged(position, newCommentArrayList.size());
                                                                 }
                                                             });
                                                 }
@@ -134,7 +101,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
 
                                         });
-                                     } else {
+                                    } else {
                                         Toast.makeText(context, "작성자만 삭제할 수 있습니다.", Toast.LENGTH_LONG).show();
                                     }
                                 }
@@ -160,35 +127,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
             }
         });
 
-
     }
-
 
     @Override
     public int getItemCount() {
-        return newPostArrayList.size();
+        return newCommentArrayList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView title_card;
-        TextView subtitle_card,content_card;
-        TextView time_card;
-        TextView tag;
-        static ImageView delete;
-        String docTitle;
-        TextView uid;
-        CardView card;
+        TextView comment,uid;
+        ImageView delete;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            title_card = itemView.findViewById(R.id.title_card);
-            subtitle_card = itemView.findViewById(R.id.subtitle_card);
-            content_card = itemView.findViewById(R.id.content_card);
-            tag = itemView.findViewById(R.id.tag);
-            time_card = itemView.findViewById(R.id.content_time);
-            delete = itemView.findViewById(R.id.delete_card);
-            card = itemView.findViewById(R.id.card_view);
-
+            comment = itemView.findViewById(R.id.comment_card);
+            uid = itemView.findViewById(R.id.user_id);
+            delete = itemView.findViewById(R.id.delete_comment);
         }
     }
 }
