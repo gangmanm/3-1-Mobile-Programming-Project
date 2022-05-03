@@ -170,7 +170,7 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="12dp"
-                android:background="#F2E2C6"
+                android:background="@color/white"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="131dp"
