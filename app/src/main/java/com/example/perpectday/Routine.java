@@ -19,10 +19,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class Routine extends AppCompatActivity {
 
     Button Button_routineAdd, Button_planAdd;
     Dialog dialog_routineAdd, dialog_planAdd;
+    FirebaseFirestore db;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,11 @@ public class Routine extends AppCompatActivity {
                 showDialog01();
             }
         });
+
+
+        // 파이어베이스 추가하기
+        db = FirebaseFirestore.getInstance();
+
     }
 
     public void showDialog01(){
@@ -92,5 +103,15 @@ public class Routine extends AppCompatActivity {
 
         // 6. 생성 및 설정된 체크박스 레이아웃에 적용
         ll.addView(checkboxView);
+
+        NewRoutine newRoutine = new NewRoutine();
+        newRoutine.setUid(user.getUid());
+        newRoutine.setContent(name);
+
+
+        db.collection("NewRoutine")
+                .add(newRoutine);
+
+        Toast.makeText(Routine.this,"루틴이 추가되었습니다.",Toast.LENGTH_LONG).show();
     }
 }
