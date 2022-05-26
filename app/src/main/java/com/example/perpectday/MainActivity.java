@@ -23,7 +23,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 //지금까지 가장 잘 된것 
 public class MainActivity extends AppCompatActivity {
-
     private SignInButton signInButton;
     private GoogleSignInClient mGoogleSignInClient;
     private String TAG="mainTag";
