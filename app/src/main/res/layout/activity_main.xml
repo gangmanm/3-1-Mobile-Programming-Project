@@ -12,18 +12,28 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/titlee"
+        tools:layout_editor_absoluteY="-171dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="257dp"
+        app:srcCompat="@drawable/titleca"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="62dp" />
+        tools:layout_editor_absoluteY="304dp" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/SignIn_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="552dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </com.google.android.gms.common.SignInButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
