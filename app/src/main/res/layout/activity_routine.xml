@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        //루틴
+        //루틴 카드뷰
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height= "300dp"
@@ -44,20 +44,40 @@
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <LinearLayout
-                        android:id="@+id/LinearLayout_RoutineList"
+                        android:id="@+id/LinearLayout_routineList_viertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:visibility="visible">
+                        android:visibility="visible"
+                        android:orientation="vertical">
 
-                        <CheckBox
-                            android:id="@+id/check1_1"
+                        <LinearLayout
+                            android:id="@+id/LinearLayout_routineList_horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="drink a glass of water"
-                            android:textSize="20dp" />
+                            android:weightSum="3"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:textSize="20dp"
+                                android:text="09:00"/>
+
+                            <CheckBox
+                                android:id="@+id/check1_1"
+                                android:layout_weight="2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="drink a glass of water"
+                                android:textSize="20dp" />
+
+                        </LinearLayout>
+
                     </LinearLayout>
+
                 </ScrollView>
 
                 <Button

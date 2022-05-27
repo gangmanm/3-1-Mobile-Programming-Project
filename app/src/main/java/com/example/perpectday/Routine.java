@@ -49,7 +49,6 @@ public class Routine extends AppCompatActivity {
             }
         });
 
-
         // 파이어베이스 추가하기
         db = FirebaseFirestore.getInstance();
 
@@ -80,7 +79,7 @@ public class Routine extends AppCompatActivity {
     }
 
     public void createCheckBox01(){
-        LinearLayout ll = findViewById(R.id.LinearLayout_RoutineList);
+        LinearLayout ll = findViewById(R.id.LinearLayout_routineList_viertical);
 
         // 1. 체크박스 객체 생성
         CheckBox checkboxView = new CheckBox(getApplicationContext());
