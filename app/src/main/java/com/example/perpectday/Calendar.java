@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +19,7 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Calendar extends AppCompatActivity {
+public class Calendar extends AppCompatActivity implements OnItemClickListener {
     TextView curMonthTxt; //년월 텍스트뷰
     LocalDate selectedDate; //년월 변수 (날짜 정보만 가져올 때 사용하는 함수)
     RecyclerView recyclerView;
@@ -66,15 +67,18 @@ public class Calendar extends AppCompatActivity {
 
     //현재 날짜를 받아서 형식을 바꾼뒤 리턴해줌(형식 재지정)
     private String currentDate(LocalDate date){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM월 yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월");
         return date.format(formatter);
     }
 
     //set display
     private void setMonthView() {
+        //년, 월 텍스트뷰
         curMonthTxt.setText(currentDate(selectedDate));
+        //해당 월 날짜 가져오기
         ArrayList<String> dayList = dayInMonth(selectedDate);
-        CalendarAdapter adapter = new CalendarAdapter(dayList);
+        //어뎁터데이터 적용
+        CalendarAdapter adapter = new CalendarAdapter(dayList, Calendar.this);
 
         //setting layout(column = 7)
         RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(), 7);
@@ -107,5 +111,11 @@ public class Calendar extends AppCompatActivity {
             }
         }
         return dayList;
+    }
+    //인터페이스 구현(날짜 어뎁터에서 넘겨준 날짜를 받는다
+    @Override
+    public void onItemClick(String dayText) {
+        String yearMonthDay = currentDate(selectedDate) + " " +dayText + "일";
+        Toast.makeText(this, yearMonthDay, Toast.LENGTH_LONG).show();
     }
 }
