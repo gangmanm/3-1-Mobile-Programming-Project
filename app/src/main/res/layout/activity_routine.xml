@@ -18,12 +18,12 @@
         //루틴 카드뷰
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height= "300dp"
+            android:layout_height= "wrap_content"
             android:layout_margin="20dp"
-            android:onClick="expand"
             app:cardCornerRadius="20dp"
             app:cardElevation="18dp"
             app:contentPadding="20dp">
+
 
             <LinearLayout
                 android:id="@+id/LinearLayout_Routine"
@@ -39,6 +39,8 @@
                     android:textColor="#3C5A93"
                     android:textSize="30sp"
                     android:textStyle="bold" />
+
+
 
                 //루틴 리스트 (체크박스) 스크롤
                 <ScrollView
@@ -80,6 +82,8 @@
 
                 </ScrollView>
 
+                // 수정중
+
                 <Button
                     android:id="@+id/Button_routineAdd"
                     android:layout_width="wrap_content"
@@ -89,6 +93,20 @@
                     android:layout_marginEnd="10dp"
                     android:backgroundTint="#3C5A93"
                     android:text="Add" />
+
+                <Button
+                    android:id="@+id/Button_routineDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#DB4455"
+                    android:text="Delete"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/Button_routineAdd" />
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>

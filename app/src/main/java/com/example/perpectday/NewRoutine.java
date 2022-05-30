@@ -14,7 +14,6 @@ public class NewRoutine {
         this.uid = uid;
     }
 
-
     public String getContent() {
         return content;
     }

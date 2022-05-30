@@ -107,10 +107,10 @@ public class Routine extends AppCompatActivity {
         newRoutine.setUid(user.getUid());
         newRoutine.setContent(name);
 
-
+/*
         db.collection("NewRoutine")
                 .add(newRoutine);
 
-        Toast.makeText(Routine.this,"루틴이 추가되었습니다.",Toast.LENGTH_LONG).show();
+        Toast.makeText(Routine.this,"루틴이 추가되었습니다.",Toast.LENGTH_LONG).show();*/
     }
 }
