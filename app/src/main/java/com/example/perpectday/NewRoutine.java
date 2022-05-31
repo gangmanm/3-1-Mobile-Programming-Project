@@ -5,6 +5,7 @@ public class NewRoutine {
 
     private String content;
     private String uid;
+    private int check;
 
     public String getUid() {
         return uid;
@@ -14,7 +15,6 @@ public class NewRoutine {
         this.uid = uid;
     }
 
-
     public String getContent() {
         return content;
     }
@@ -23,5 +23,11 @@ public class NewRoutine {
         this.content = content;
     }
 
+    public int getCheck() {
+        return check;
+    }
 
+    public void setCheck(int check) {
+        this.check = check;
+    }
 }
