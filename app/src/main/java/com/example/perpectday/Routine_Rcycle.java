@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,12 +27,16 @@ import java.util.ArrayList;
 public class Routine_Rcycle extends AppCompatActivity {
 
 
+
+
         RecyclerView recyclerView;
         ArrayList<NewRoutine> newRoutineArrayList;
         MyRoutineAdapter myRoutineAdapter;
         FirebaseFirestore db;
         NewRoutine newRoutine;
         EditText post_routine;
+        public static int count_ru=0;
+        public static int ary_count=0;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         public static String title="";
         @Override
@@ -55,7 +61,7 @@ public class Routine_Rcycle extends AppCompatActivity {
             myRoutineAdapter = new MyRoutineAdapter(com.example.perpectday.Routine_Rcycle.this,newRoutineArrayList);
 
             recyclerView.setAdapter(myRoutineAdapter);
-
+            newRoutineArrayList.clear();
             EventChangeListener();
 
 
@@ -78,14 +84,31 @@ public class Routine_Rcycle extends AppCompatActivity {
 
                     newRoutine.setUid(user.getUid());
 
+                    newRoutine.setCheck(0);
+
                     db.collection("NewRoutine")
                             .add(newRoutine);
 
                     Toast.makeText(Routine_Rcycle.this,"data inserted succefully",Toast.LENGTH_LONG).show();
-
+                    post_routine.setText("");
+                    count_routine();
 
                 }
             });
+
+            TextView profile = findViewById(R.id.profile);
+            profile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    User_Profile.count_array = count_array();
+                    User_Profile.count_routine =count_routine();
+
+                    Intent intent = new Intent(getApplicationContext(), User_Profile.class);
+                    startActivity(intent);
+
+                }
+            });
+
 
 
         }
@@ -114,6 +137,27 @@ public class Routine_Rcycle extends AppCompatActivity {
                             }
                         }
                     });
+        }
+
+        public int count_routine()
+        {
+            int count=0;
+
+            for(int i=0; i<newRoutineArrayList.size(); i++)
+            {
+                count+=newRoutineArrayList.get(i).getCheck();
+            }
+
+
+            User_Profile.count_routine = count;
+            return count;
+        }
+
+        public int count_array()
+        {
+            ary_count = newRoutineArrayList.size();
+            User_Profile.count_array = ary_count;
+            return newRoutineArrayList.size();
         }
 
 
