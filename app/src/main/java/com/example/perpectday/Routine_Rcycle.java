@@ -51,6 +51,8 @@ public class Routine_Rcycle extends AppCompatActivity {
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+            PhOffsetItemDecoration itemDecoration = new PhOffsetItemDecoration(10);
+            recyclerView.addItemDecoration(itemDecoration);
             post_routine = (EditText)findViewById(R.id.inputRoutine);
 
 
