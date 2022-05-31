@@ -105,7 +105,7 @@ public class Routine_Rcycle extends AppCompatActivity {
                     User_Profile.count_array = count_array();
                     User_Profile.count_routine =count_routine();
 
-                    Intent intent = new Intent(getApplicationContext(), User_Profile.class);
+                    Intent intent = new Intent(getApplicationContext(), Calendar.class);
                     startActivity(intent);
 
                 }

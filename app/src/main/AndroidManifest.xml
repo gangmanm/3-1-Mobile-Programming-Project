@@ -31,7 +31,10 @@
             android:exported="false" />
         <activity
             android:name=".Routine"
-            android:exported="true" />
+            android:exported="false" />
+        <activity
+            android:name=".Calendar"
+            android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

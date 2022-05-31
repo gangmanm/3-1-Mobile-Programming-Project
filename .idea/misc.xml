@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/user/Documents/GitHub/PerpectDay_final_copy/app/src/main/res/drawable/toast_form.xml" value="0.1" />
         <entry key="..\:/Users/user/Documents/GitHub/PerpectDay_final_copy/app/src/main/res/layout/activity_calendar.xml" value="0.1" />
         <entry key="..\:/Users/userqwax/AndroidStudioProjects/PerpectDay_final/app/src/main/res/layout/activity_plan_dialog.xml" value="0.1" />
         <entry key="..\:/Users/userqwax/AndroidStudioProjects/PerpectDay_final/app/src/main/res/layout/activity_routine.xml" value="0.264" />
@@ -11,7 +12,6 @@
         <entry key="app/src/main/res/drawable/background_add_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/background_search.xml" value="0.131" />
         <entry key="app/src/main/res/drawable/background_subtitle_indicator.xml" value="0.131" />
-        <entry key="app/src/main/res/drawable/custom_progress_bg.xml" value="0.131" />
         <entry key="app/src/main/res/drawable/dashboard_item_1_background.xml" value="0.131" />
         <entry key="app/src/main/res/drawable/dashboard_item_2_background.xml" value="0.131" />
         <entry key="app/src/main/res/drawable/dashboard_item_3_background.xml" value="0.131" />
@@ -32,19 +32,15 @@
         <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.21331521739130435" />
         <entry key="app/src/main/res/layout/activity_check_my_post.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_community.xml" value="0.22056159420289856" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15795745849609374" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_plan_dialog.xml" value="0.1716485507246377" />
         <entry key="app/src/main/res/layout/activity_post.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_post_detail.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_post_list.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/activity_routine.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_routine.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_routine_dialog.xml" value="0.21331521739130435" />
-        <entry key="app/src/main/res/layout/activity_routine_rcycle.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/comment.xml" value="0.21" />
-        <entry key="app/src/main/res/layout/date_cell.xml" value="0.21014492753623187" />
         <entry key="app/src/main/res/layout/newcard.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/routine.xml" value="0.25" />
       </map>
     </option>
   </component>

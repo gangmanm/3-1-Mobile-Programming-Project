@@ -2,7 +2,10 @@ package com.example.perpectday;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -14,29 +17,46 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.skydoves.progressview.OnProgressChangeListener;
+import com.skydoves.progressview.ProgressView;
+
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Calendar extends AppCompatActivity implements OnItemClickListener {
     TextView curMonthTxt; //년월 텍스트뷰
     LocalDate selectedDate; //년월 변수 (날짜 정보만 가져올 때 사용하는 함수)
     RecyclerView recyclerView;
+    ProgressView progressView; //progressview
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_calendar);
 
         //Initialization
         curMonthTxt = findViewById(R.id.curMonthTxt);
 //        ImageButton preBtn = (ImageButton)findViewById(R.id.preBtn);
 //        ImageButton nextBtn = (ImageButton)findViewById(R.id.nextBtn);
-        Button preBtn = (Button)findViewById(R.id.prevButton);
-        Button nextBtn = (Button)findViewById(R.id.nextButton);
+        ImageButton preBtn = (ImageButton)findViewById(R.id.prevButton);
+        ImageButton nextBtn = (ImageButton)findViewById(R.id.nextButton);
         recyclerView = findViewById(R.id.recyclerView);
+
+        progressView = findViewById(R.id.progressView);
+        progressView.setOnProgressChangeListener(new OnProgressChangeListener() {
+            @Override
+            public void onChange(float v) {
+                //상태값이 변하면 라벨에 현재값 넣어주기
+                v = v /User_Profile.count_array * 100;
+                progressView.setLabelText("Total achievement" + v + "%" );
+            }
+        });
+        progressView.setProgress(User_Profile.count_routine); // 체크된거
+        progressView.setMax(User_Profile.count_array); //전체
 
         //Current Date
         selectedDate = LocalDate.now();
@@ -116,6 +136,18 @@ public class Calendar extends AppCompatActivity implements OnItemClickListener {
     @Override
     public void onItemClick(String dayText) {
         String yearMonthDay = currentDate(selectedDate) + " " +dayText + "일";
-        Toast.makeText(this, yearMonthDay, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, yearMonthDay, Toast.LENGTH_LONG).show();
+        customToastView(yearMonthDay);
+    }
+    public void customToastView(String text){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_board,(ViewGroup) findViewById(R.id.toast_board));
+        TextView textView = layout.findViewById(R.id.textboard);
+        textView.setText(text);
+
+        Toast toastView = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+        toastView.setGravity(Gravity.TOP|Gravity.TOP,10,1550);
+        toastView.setView(layout);
+        toastView.show();
     }
 }
