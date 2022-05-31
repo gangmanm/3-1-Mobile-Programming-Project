@@ -1,4 +1,5 @@
 package com.example.perpectday;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ public class Calendar extends AppCompatActivity implements OnItemClickListener {
     LocalDate selectedDate; //년월 변수 (날짜 정보만 가져올 때 사용하는 함수)
     RecyclerView recyclerView;
     ProgressView progressView; //progressview
+    Image growth;
 
 
     @Override
@@ -40,11 +43,11 @@ public class Calendar extends AppCompatActivity implements OnItemClickListener {
 
         //Initialization
         curMonthTxt = findViewById(R.id.curMonthTxt);
-//        ImageButton preBtn = (ImageButton)findViewById(R.id.preBtn);
-//        ImageButton nextBtn = (ImageButton)findViewById(R.id.nextBtn);
+
         ImageButton preBtn = (ImageButton)findViewById(R.id.prevButton);
         ImageButton nextBtn = (ImageButton)findViewById(R.id.nextButton);
         recyclerView = findViewById(R.id.recyclerView);
+
 
         progressView = findViewById(R.id.progressView);
         progressView.setOnProgressChangeListener(new OnProgressChangeListener() {
