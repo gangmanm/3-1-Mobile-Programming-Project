@@ -56,10 +56,28 @@ public class Calendar extends AppCompatActivity implements OnItemClickListener {
                 //상태값이 변하면 라벨에 현재값 넣어주기
                 v = v /User_Profile.count_array * 100;
                 progressView.setLabelText("Today's Achievement " + (int)v + "%" );
+                ImageView growth = findViewById(R.id.growth);
+                if (v>=20)
+                {
+                    growth.setImageResource(R.drawable.cat2);
+                }
+                if(v>=40)
+                {
+                    growth.setImageResource(R.drawable.cat3);
+                }
+                if(v>=70)
+                {
+                    growth.setImageResource(R.drawable.cat4);
+                }
+                if(v>=90)
+                {
+                    growth.setImageResource(R.drawable.cat5);
+                }
             }
         });
         progressView.setProgress(User_Profile.count_routine); // 체크된거
         progressView.setMax(User_Profile.count_array); //전체
+
 
         //Current Date
         selectedDate = LocalDate.now();
