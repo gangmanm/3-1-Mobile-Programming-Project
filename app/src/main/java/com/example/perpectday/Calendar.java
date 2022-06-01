@@ -55,7 +55,7 @@ public class Calendar extends AppCompatActivity implements OnItemClickListener {
             public void onChange(float v) {
                 //상태값이 변하면 라벨에 현재값 넣어주기
                 v = v /User_Profile.count_array * 100;
-                progressView.setLabelText("Total achievement" + v + "%" );
+                progressView.setLabelText("Today's Achievement " + (int)v + "%" );
             }
         });
         progressView.setProgress(User_Profile.count_routine); // 체크된거
@@ -76,6 +76,8 @@ public class Calendar extends AppCompatActivity implements OnItemClickListener {
                 setMonthView();
             }
         });
+
+
 
         //Button of Next Month
         nextBtn.setOnClickListener(new View.OnClickListener() {

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -67,6 +68,16 @@ public class Routine_Rcycle extends AppCompatActivity {
             EventChangeListener();
 
 
+            TextView community = findViewById(R.id.community2);
+            community.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent intent = new Intent(getApplicationContext(), PostList.class);
+                    startActivity(intent);
+                }
+            });
+
             ImageView imageBack=findViewById(R.id.imageBack);
             imageBack.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v)
@@ -77,6 +88,8 @@ public class Routine_Rcycle extends AppCompatActivity {
 
                 }
             });
+
+
 
             ImageView imageAddComment=findViewById(R.id.add_routine);
             imageAddComment.setOnClickListener(new View.OnClickListener(){
