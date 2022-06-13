@@ -16,7 +16,7 @@ Grow up the chracter according to the achievement rate.
   - you can see my achievement with character
 
 # Log in
-![image desciption](https://weekly.donga.com/List/3/all/11/1481232/1)
+
 
 # Routine
 
