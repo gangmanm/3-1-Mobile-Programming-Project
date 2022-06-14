@@ -30,9 +30,6 @@
             android:name=".Post"
             android:exported="false" />
         <activity
-            android:name=".Routine"
-            android:exported="false" />
-        <activity
             android:name=".Calendar"
             android:exported="false"/>
         <activity
