@@ -23,7 +23,7 @@ Grow up the chracter according to the achievement rate.
 
 # Community
 <img width="270" alt="image" src="https://user-images.githubusercontent.com/86233382/173415055-9d38a288-4cd2-48c1-94ae-e16d408c7b63.png">
--> Allows users to select and view the information they want by allowing them to view categories in the list <\n>
+-> Allows users to select and view the information they want by allowing them to view categories in the list 
 -> Press the plus button to create a post
 
 <img width="270" alt="image" src="https://user-images.githubusercontent.com/86233382/173415117-f87f5e62-91ed-4591-b665-8af8ce168aee.png">
