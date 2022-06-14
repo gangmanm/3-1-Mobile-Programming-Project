@@ -51,16 +51,20 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyVi
 
         NewComment newComment = newCommentArrayList.get(position);
 
+
+        // Assign the variable in the Card View
         holder.comment.setText(newComment.getComment());
         holder.uid.setText(newComment.getUid());
-
         holder.delete.setOnClickListener(new View.OnClickListener() {
 
 
+            // Code to Delete the written post, remove it from the firebase database
+            // check if the user UID match with the post uploader UID
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
+                // show the AlertDialog for warn user that deleted post cannot be restored
                 builder.setTitle("댓글을 삭제하시겠습니까?");
                 builder.setMessage("한번 삭제시 되돌릴 수 없습니다");
                 builder.setPositiveButton("네", new DialogInterface.OnClickListener() {
@@ -70,6 +74,7 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyVi
 
                         if(user.getUid().toString().equals(newComment.getUid())) {
 
+                            // Check the writerUid of the Post and Content of the comment to specify the target comment
                             db.collection("NewComment").whereEqualTo("writerUid", newComment.getWriterUid())
                                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override

@@ -55,17 +55,22 @@ public class MyRoutineAdapter extends RecyclerView.Adapter<MyRoutineAdapter.MyVi
 
         NewRoutine newRoutine = newRoutineArrayList.get(position);
 
+
+
         holder.mycheckbox.setText(newRoutine.getContent());
 
 
 
+        // if the variable 'Checked' is '1' Check the CheckBox Button
         if(newRoutine.getCheck()==1) {
             holder.mycheckbox.setChecked(true);
 
 
         }
 
-        //체크하면 1 올라가고 아니면 1 내림
+        // If User has checked the Routine , set the variable checked in Firestore as '1'
+        // If the routine is not checked set the checked variable as '0'
+        // This allow the routine status can be restored after user has terminated for application
         holder.mycheckbox.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -107,6 +112,7 @@ public class MyRoutineAdapter extends RecyclerView.Adapter<MyRoutineAdapter.MyVi
                         }
                     });
                 } else {
+                    // if the CheckBox is unchecked
                     // TODO : CheckBox is unchecked.
                     newRoutine.setCheck(0);
                     System.out.println("체크되었습니다.");
@@ -153,6 +159,8 @@ public class MyRoutineAdapter extends RecyclerView.Adapter<MyRoutineAdapter.MyVi
 
 
 
+        // Delete the User Routine  remove it from the firebase database
+        // check if the user UID match with the routine uploader UID
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

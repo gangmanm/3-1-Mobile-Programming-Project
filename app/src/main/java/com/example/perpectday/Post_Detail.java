@@ -51,11 +51,13 @@ public class Post_Detail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail);
 
+        // Dynamically add the Post cardview in the noteRecyclerView
         recyclerView = findViewById(R.id.noteRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
+        // Dynamically add the comment cardview in the commentRecycler view
         recyclerCommentView = findViewById(R.id.commentRecyclerView);
         recyclerCommentView.setHasFixedSize(true);
         recyclerCommentView.setLayoutManager(new LinearLayoutManager(this));
@@ -65,7 +67,10 @@ public class Post_Detail extends AppCompatActivity {
 
         newComment = new NewComment();
 
+        // create Firebase Firestore instance
         db = FirebaseFirestore.getInstance();
+
+        // Create ArrayList for Post and Comment
         newPostArrayList = new ArrayList<NewPost>();
         newCommentArrayList = new ArrayList<NewComment>();
 
@@ -78,15 +83,15 @@ public class Post_Detail extends AppCompatActivity {
         recyclerCommentView.setAdapter(myCommentAdapter);
 
 
-
-
-
         newCommentArrayList.clear();
+
+        //Every time that user enter the activity check the changes in the Firestore database
         EventChangeListener();
         EventCommentChangeListener();
 
 
 
+        // if Back Button (<) is pressed go to previous activity
         ImageView imageBack=findViewById(R.id.imageBack);
         imageBack.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v)
@@ -98,6 +103,8 @@ public class Post_Detail extends AppCompatActivity {
             }
         });
 
+
+        // if Clieck the add comment image get the data that user has entered and save it in to Comment collection in Firesotre
         ImageView imageAddComment=findViewById(R.id.add_comment);
         imageAddComment.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v)
@@ -124,6 +131,7 @@ public class Post_Detail extends AppCompatActivity {
     }
 
 
+    // EventChangeListener get the Post from the Firestore database every time that user call the function and save the data in the newPostArrayList
     private void EventChangeListener() {
         db.collection("NewPost").whereEqualTo("title",title)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -149,7 +157,7 @@ public class Post_Detail extends AppCompatActivity {
                 });
     }
 
-
+    // EventCommentChangeListener get the Comment from the Firestore database every time that user call the function and save the data in the newCommentArrayList
     private void EventCommentChangeListener() {
         db.collection("NewComment").whereEqualTo("writerUid",WriterUid)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {

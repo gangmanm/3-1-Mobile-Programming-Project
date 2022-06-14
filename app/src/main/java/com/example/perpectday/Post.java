@@ -28,7 +28,6 @@ import java.util.Calendar;
 public class Post extends AppCompatActivity {
 EditText post_title,post_subtitle,post_content;
 NewPost newpost;
-private String[] tags = {"운동","다이어트","기업가","스킨케어"};
 private TextView mtags;
 private AlertDialog mtageSelected;
 FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -37,6 +36,7 @@ FirebaseFirestore db = FirebaseFirestore.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
+        // Assign the variable with appropriate xml layout
         RadioGroup radtag = findViewById(R.id.tagGroup);
         RadioButton health = findViewById(R.id.tag_health);
         RadioButton godlife = findViewById(R.id.tag_godlife);
@@ -47,11 +47,15 @@ FirebaseFirestore db = FirebaseFirestore.getInstance();
         post_content = (EditText)findViewById(R.id.content);
 
 
-        //Pring New Post Class
+        // Create new post object
         newpost = new NewPost();
+
+
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
          DatabaseReference conditionRef = mRootRef.child("txt");
 
+
+         // if < pressed go to previous acitivty
         ImageView imageBack=findViewById(R.id.imageBack);
         imageBack.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v)
@@ -64,10 +68,13 @@ FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         EditText NoteTitle  = (EditText)findViewById(R.id.inputNoteTitle);
 
+        // Get the UID of current user
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         ImageView imageSave = findViewById(R.id.imageSave);
         imageSave.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+
+                // If clicking the (V) button get the title, subtitle, content , time , uid and tag that user has written
                newpost.setTitle(post_title.getText().toString());
                newpost.setSubtitle(post_subtitle.getText().toString());
                newpost.setContent(post_content.getText().toString());
@@ -89,11 +96,13 @@ FirebaseFirestore db = FirebaseFirestore.getInstance();
 
                 newpost.setTag(mytag);
 
+                // Get the NewPost collection in Firebase Firestore and save the newly created post data
                 db.collection("NewPost")
                         .add(newpost);
 
                 Toast.makeText(Post.this,"data inserted succefully",Toast.LENGTH_LONG).show();
 
+                // if Data has been saved in the database return to PostList section
                 startActivityForResult(new Intent(getApplicationContext(),PostList.class),
                         1);
             }

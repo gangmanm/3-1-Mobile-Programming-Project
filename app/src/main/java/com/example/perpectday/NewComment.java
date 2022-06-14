@@ -3,6 +3,7 @@ package com.example.perpectday;
 public class NewComment {
 
 
+    // Class for NewComment object , save uid, comment , Post WriterUid
     private String comment;
     private String uid;
     private String writerUid;

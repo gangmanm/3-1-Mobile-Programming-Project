@@ -2,6 +2,7 @@ package com.example.perpectday;
 
 public class NewPost{
 
+    // Class for NewPost object , save uid, Tag, title, subtitle, content of the post, written tme
     private String title;
     private String subtitle;
     private String content;

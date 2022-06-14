@@ -48,6 +48,7 @@ public class Routine_Rcycle extends AppCompatActivity {
 
 
 
+
             recyclerView = findViewById(R.id.routineRecyclerView);
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -91,6 +92,8 @@ public class Routine_Rcycle extends AppCompatActivity {
 
 
 
+
+            // If Click the AddButton add the new Routine in the FireStore database
             ImageView imageAddComment=findViewById(R.id.add_routine);
             imageAddComment.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v)
@@ -112,6 +115,8 @@ public class Routine_Rcycle extends AppCompatActivity {
             });
 
             TextView profile = findViewById(R.id.profile);
+
+            //count the checked routine and, total routine to calculate success rate
             profile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -129,6 +134,8 @@ public class Routine_Rcycle extends AppCompatActivity {
         }
 
 
+    // EventChangeListener get the Routine from the
+    // Firestore database every time that user call the function and save the data in the newRoutineArrayList
         private void EventChangeListener() {
             db.collection("NewRoutine").whereEqualTo("uid",user.getUid())
                     .addSnapshotListener(new EventListener<QuerySnapshot>() {

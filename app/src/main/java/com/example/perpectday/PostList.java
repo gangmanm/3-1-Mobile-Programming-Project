@@ -54,6 +54,7 @@ public class PostList extends AppCompatActivity {
 
         ImageView imageAddNoteMain = findViewById(R.id.imageAddNoteMain);
 
+        // if user click the + Button , he or she move to writing post activity
         imageAddNoteMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,6 +65,7 @@ public class PostList extends AppCompatActivity {
 
         ImageView imageCheckMine = findViewById(R.id.imageAddLink);
 
+        // if user check my profile button , move to activity that can only see the post they have written
         imageCheckMine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,28 +76,10 @@ public class PostList extends AppCompatActivity {
 
 
 
-
-        /*
-        ImageView imageRefresh = findViewById(R.id.imageAddImage);
-
-        imageRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                newPostArrayList.clear();
-                EventChangeListener();
-            }
-        });
-      */
-
-
     }
 
-    private void deleteProduct()
-    {
-
-    }
-
+    // EventChangeListener get the Post from the Firestore database every time
+    // that user call the function and save the data in the newPostArrayList
     private void EventChangeListener() {
         db.collection("NewPost").orderBy("time", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {

@@ -63,15 +63,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
         NewPost newpost = newPostArrayList.get(position);
 
+        // Assign the variable in the Card View
         holder.title_card.setText(newpost.getTitle());
         holder.subtitle_card.setText(newpost.getSubtitle());
         holder.content_card.setText(newpost.getContent());
-
-
-
         holder.time_card.setText(newpost.getTime());
         holder.tag.setText(newpost.getTag());
 
+        // If click the each card view , move to new Activity that can see comment of the post
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,6 +103,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
                         if(user.getUid().toString().equals(newpost.getUid())) {
 
+                            // Check the user UID to allow only writer delete the post
                             db.collection("NewPost").whereEqualTo("uid", user.getUid())
                                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override

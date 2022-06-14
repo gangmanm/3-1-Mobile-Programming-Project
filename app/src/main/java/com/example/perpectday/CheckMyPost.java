@@ -30,10 +30,13 @@ public class CheckMyPost extends AppCompatActivity {
     FirebaseFirestore db;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     @Override
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_my_post);
 
+        // Create recycler variable and assgin noteRecycerView
         recyclerView = findViewById(R.id.noteRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -41,14 +44,21 @@ public class CheckMyPost extends AppCompatActivity {
 
 
 
+        // Create Firebase Firestore instance
         db = FirebaseFirestore.getInstance();
+
+        // Create Array list to save the Post object
         newPostArrayList = new ArrayList<NewPost>();
+        // get the Adapter to connect arraylist and recycler view
         myAdapter = new MyAdapter(CheckMyPost.this,newPostArrayList);
         recyclerView.setAdapter(myAdapter);
 
 
+
         EventChangeListener();
         ImageView imageBack=findViewById(R.id.imageBack);
+
+        // if click the < back button go back to postlist class
         imageBack.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v)
             {
@@ -62,7 +72,9 @@ public class CheckMyPost extends AppCompatActivity {
     }
 
 
+    // Add the data from the firestore to NewPost ArrayList
     private void EventChangeListener() {
+        // Only get the post of logged user
         db.collection("NewPost").whereEqualTo("uid",user.getUid())
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -78,6 +90,7 @@ public class CheckMyPost extends AppCompatActivity {
                         {
                             if(dc.getType() == DocumentChange.Type.ADDED)
                             {
+                                // save it in to array list
                                 newPostArrayList.add(dc.getDocument().toObject(NewPost.class));
                             }
                             myAdapter.notifyDataSetChanged();

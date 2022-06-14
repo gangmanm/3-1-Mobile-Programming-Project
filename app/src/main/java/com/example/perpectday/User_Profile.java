@@ -52,8 +52,7 @@ public class User_Profile extends AppCompatActivity {
         imageBack.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v)
             {
-                // startActivityForResult(new Intent(getApplicationContext(),PostList.class),
-                // 1);
+
                 onBackPressed();
 
             }
